@@ -115,10 +115,27 @@ def write_femelement_material(f, ccxwriter):
                 # femobj --> dict, FreeCAD document object is nlfemobj["Object"]
                 nl_mat_obj = nlfemobj["Object"]
                 if nl_mat_obj.LinearBaseMaterial == mat_obj:
-                    if nl_mat_obj.MaterialModelNonlinearity == "isotropic hardening":
-                        f.write("*PLASTIC\n")
-                    else:
-                        f.write("*PLASTIC, HARDENING=KINEMATIC\n")
-                    for yield_point in nl_mat_obj.YieldPoints:
-                        f.write(f"{yield_point}\n")
+                    match nl_mat_obj.MaterialModelNonlinearity:
+                        case "isotropic hardening":
+                            f.write("*PLASTIC\n")
+                        case "kinematic hardening":
+                            f.write("*PLASTIC, HARDENING=KINEMATIC\n")
+                        case "arruda-boyce":
+                            f.write("*HYPERELASTIC, ARRUDA-BOYCE\n")
+                        case "mooney-rivlin":
+                            f.write("*HYPERELASTIC, MOONEY-RIVLIN\n")
+                        case "neo hooke":
+                            f.write("*HYPERELASTIC, NEO HOOKE\n")
+                        case "ogden":
+                            f.write(f"*HYPERELASTIC, OGDEN, N={nl_mat_obj.N}\n")
+                        case "polynomial":
+                            f.write(f"*HYPERELASTIC, POLYNOMIAL, N={nl_mat_obj.N}\n")
+                        case "reduced polynomial":
+                            f.write(f"*HYPERELASTIC, REDUCED POLYNOMIAL, N={nl_mat_obj.N}\n")
+                        case "yeoh":
+                            f.write("*HYPERELASTIC, YEOH\n")
+                        case "hyperfoam":
+                            f.write(f"*HYPERFOAM, N={nl_mat_obj.N}\n")
+                    for nonlinear_point in nl_mat_obj.NonlinearData:
+                        f.write(f"{nonlinear_point}\n")
                 f.write("\n")
