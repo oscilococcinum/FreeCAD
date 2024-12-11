@@ -109,7 +109,7 @@ def write_femelement_material(f, ccxwriter):
                 f.write(f"{SH_in_JkgK:.13G},{DV_in_tmms:.13G}\n")
 
         # nonlinear material properties
-        if ccxwriter.solver_obj.MaterialNonlinearity == "nonlinear":
+        if ccxwriter.solver_obj.MaterialNonlinearity == "elasto-plastic":
 
             for nlfemobj in ccxwriter.member.mats_nonlinear:
                 # femobj --> dict, FreeCAD document object is nlfemobj["Object"]
@@ -119,6 +119,20 @@ def write_femelement_material(f, ccxwriter):
                         f.write("*PLASTIC\n")
                     else:
                         f.write("*PLASTIC, HARDENING=KINEMATIC\n")
-                    for yield_point in nl_mat_obj.YieldPoints:
-                        f.write(f"{yield_point}\n")
+                    for nonlinear_point in nl_mat_obj.NonlinearData:
+                        f.write(f"{nonlinear_point}\n")
+                f.write("\n")
+
+        if ccxwriter.solver_obj.MaterialNonlinearity == "hyperelastic":
+
+            for nlfemobj in ccxwriter.member.mats_nonlinear:
+                # femobj --> dict, FreeCAD document object is nlfemobj["Object"]
+                nl_mat_obj = nlfemobj["Object"]
+                if nl_mat_obj.LinearBaseMaterial == mat_obj:
+                    if nl_mat_obj.MaterialModelNonlinearity == "yeoh":
+                        f.write("*HYPERELASTIC, YEOH\n")
+                    else:
+                        f.write("*HYPERELASTIC, YEOH\n")
+                    for nonlinear_point in nl_mat_obj.NonlinearData:
+                        f.write(f"{nonlinear_point}\n")
                 f.write("\n")

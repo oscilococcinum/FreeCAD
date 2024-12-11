@@ -62,7 +62,7 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
 
         self.add_properties(obj)
         if yield_points:
-            obj.YieldPoints = yield_points
+            obj.NonlinearData = yield_points
 
         # TODO: If in the future more nonlinear options are added, update choices here.
 
@@ -82,7 +82,7 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             obj.setPropertyStatus("LinearBaseMaterial", "LockDynamic")
 
         if not hasattr(obj, "MaterialModelNonlinearity"):
-            choices_nonlinear_material_models = ["isotropic hardening", "kinematic hardening"]
+            choices_nonlinear_material_models = ["isotropic hardening", "kinematic hardening", "yeoh"]
             obj.addProperty(
                 "App::PropertyEnumeration",
                 "MaterialModelNonlinearity",
@@ -92,6 +92,7 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             obj.setPropertyStatus("MaterialModelNonlinearity", "LockDynamic")
             obj.MaterialModelNonlinearity = choices_nonlinear_material_models
             obj.MaterialModelNonlinearity = choices_nonlinear_material_models[0]
+            obj.MaterialModelNonlinearity = choices_nonlinear_material_models[1]
 
         if (
             hasattr(obj, "MaterialModelNonlinearity")
@@ -103,14 +104,14 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             ]
             obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models
             obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models[0]
+            obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models[1]
 
-        if not hasattr(obj, "YieldPoints"):
+        if not hasattr(obj, "NonlinearData"):
             obj.addProperty(
                 "App::PropertyStringList",
-                "YieldPoints",
+                "NonlinearData",
                 "Fem",
-                "Set stress and strain for yield points as a list of strings, "
-                'each point "stress, plastic strain"',
+                "Set corresponding model data as a list of strings",
             )
-            obj.setPropertyStatus("YieldPoints", "LockDynamic")
-            obj.YieldPoints = []
+            obj.setPropertyStatus("NonlinearData", "LockDynamic")
+            obj.NonlinearData = []
