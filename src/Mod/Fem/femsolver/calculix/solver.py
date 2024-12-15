@@ -83,7 +83,7 @@ class _BaseSolverCalculix:
             obj.GeometricalNonlinearity = choices_geom_nonlinear[0]
 
         if not hasattr(obj, "MaterialNonlinearity"):
-            choices_material_nonlinear = ["linear", "elasto-plastic", "hyperelastic"]
+            choices_material_nonlinear = ["linear", "nonlinear"]
             obj.addProperty(
                 "App::PropertyEnumeration",
                 "MaterialNonlinearity",
@@ -92,7 +92,6 @@ class _BaseSolverCalculix:
             )
             obj.MaterialNonlinearity = choices_material_nonlinear
             obj.MaterialNonlinearity = choices_material_nonlinear[0]
-            obj.MaterialNonlinearity = choices_material_nonlinear[1]
 
         if not hasattr(obj, "EigenmodesCount"):
             obj.addProperty(

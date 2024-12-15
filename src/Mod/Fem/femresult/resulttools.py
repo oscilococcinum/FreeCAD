@@ -447,8 +447,9 @@ def add_principal_stress_std(res_obj):
     #
 
     MatMechNon = FreeCAD.ActiveDocument.getObject("MaterialMechanicalNonlinear")
-    if MatMechNon:
-        stress_strain = MatMechNon.YieldPoints
+    if MatMechNon and (MatMechNon.MaterialModelNonlinearity == "isotropic hardening" or
+                       MatMechNon.MaterialModelNonlinearity == "kinematic hardening"):
+        stress_strain = MatMechNon.NonlinearData
         if stress_strain:
             i = -1
             while stress_strain[i] == "":

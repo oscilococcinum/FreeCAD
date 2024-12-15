@@ -82,7 +82,19 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             obj.setPropertyStatus("LinearBaseMaterial", "LockDynamic")
 
         if not hasattr(obj, "MaterialModelNonlinearity"):
-            choices_nonlinear_material_models = ["isotropic hardening", "kinematic hardening", "yeoh"]
+            choices_nonlinear_material_models = [
+                "isotropic hardening",
+                "kinematic hardening",
+                "arruda-boyce",
+                "mooney-rivlin",
+                "neo hooke",
+                "ogden",
+                "polynomial",
+                "reduced polynomial",
+                "yeoh",
+                "hyperfoam"
+            ]
+
             obj.addProperty(
                 "App::PropertyEnumeration",
                 "MaterialModelNonlinearity",
@@ -92,7 +104,6 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             obj.setPropertyStatus("MaterialModelNonlinearity", "LockDynamic")
             obj.MaterialModelNonlinearity = choices_nonlinear_material_models
             obj.MaterialModelNonlinearity = choices_nonlinear_material_models[0]
-            obj.MaterialModelNonlinearity = choices_nonlinear_material_models[1]
 
         if (
             hasattr(obj, "MaterialModelNonlinearity")
@@ -101,10 +112,17 @@ class MaterialMechanicalNonlinear(base_fempythonobject.BaseFemPythonObject):
             updated_choices_nonlinear_material_models = [
                 "isotropic hardening",
                 "kinematic hardening",
+                "arruda-boyce",
+                "mooney-rivlin",
+                "neo hooke",
+                "ogden",
+                "polynomial",
+                "reduced polynomial",
+                "yeoh",
+                "hyperfoam"
             ]
             obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models
             obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models[0]
-            obj.MaterialModelNonlinearity = updated_choices_nonlinear_material_models[1]
 
         if not hasattr(obj, "NonlinearData"):
             obj.addProperty(
