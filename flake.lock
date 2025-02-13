@@ -1,0 +1,47 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1739214665,
+        "narHash": "sha256-26L8VAu3/1YRxS8MHgBOyOM8xALdo6N0I04PgorE7UM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "64e75cd44acf21c7933d61d7721e812eac1b5a0a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1735908885,
+        "narHash": "sha256-ond2JYlfiC2GVupFk2IKK1U8IyCiHAk/P74+V3hGLSo=",
+        "ref": "adds-hyperelastic-material-models",
+        "rev": "0d8f0396aea936bea0ad558b199799266388398a",
+        "revCount": 39748,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/oscilococcinum/FreeCAD"
+      },
+      "original": {
+        "ref": "adds-hyperelastic-material-models",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/oscilococcinum/FreeCAD"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "repo": "repo"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

@@ -31,6 +31,7 @@
 , yaml-cpp
 , zlib
 , withWayland ? false
+, repo
 }:
 let
   opencascade-occt = opencascade-occt_7_6;
@@ -65,11 +66,7 @@ freecad-utils.makeCustomizable (stdenv.mkDerivation (finalAttrs: {
   pname = "freecad";
   version = "dev";
 
-  src = builtins.fetchGit {
-    url = https://github.com/oscilococcinum/FreeCAD;
-    ref = "adds-hyperelastic-material-models";
-    submodules = true;
-  };
+  src = repo;
 
   nativeBuildInputs = [
     cmake
