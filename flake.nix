@@ -9,7 +9,7 @@
       url = "https://github.com/realthunder/FreeCAD/releases/download/20241003stable/FreeCAD-Link-Stable-Linux-x86_64-py3.11-20241003.AppImage";
       flake = false;
     };
-    astocad-repo = {
+    astocad-src = {
       type = "git";
       url = "https://github.com/AstoCAD/FreeCAD";
       ref = "AstoCAD";
@@ -23,11 +23,11 @@
         name = system;
         value = with import nixpkgs { inherit system; config.allowUnfree = true;}; rec {
 
-          freecad-appimage = pkgs.callPackage (import ./package/nix/weekly.nix) { src-flake = inputs.appimage-file-weekly; };
+          freecad-appimage = pkgs.callPackage (import ./package/nix/weekly.nix) { src = inputs.appimage-file-weekly; };
 
-          freecadrt-appimage = pkgs.callPackage (import ./package/nix/realthunder.nix) { src-flake = inputs.appimage-file-rt; };
+          freecadrt-appimage = pkgs.callPackage (import ./package/nix/realthunder.nix) { src = inputs.appimage-file-rt; pname = "freecad-weekly"; version = "dev"; };
 
-          astocad = pkgs.callPackage (import ./package/nix/default.nix) { src-flake = inputs.astocad-repo; };
+          astocad = pkgs.callPackage (import ./package/nix/default.nix) { src = inputs.astocad-src; pname = "astocad"; version = "dev"; };
 
           default = freecad-appimage;
         };

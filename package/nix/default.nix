@@ -31,7 +31,9 @@
 , yaml-cpp
 , zlib
 , withWayland ? false
-, src-flake
+, src
+, version
+, pname
 }:
 let
   opencascade-occt = opencascade-occt_7_6;
@@ -63,10 +65,7 @@ let
   freecad-utils = callPackage ./freecad/freecad-utils.nix { };
 in
 freecad-utils.makeCustomizable (stdenv.mkDerivation (finalAttrs: {
-  pname = "AstoCAD";
-  version = "1.0.0";
-
-  src = src-flake;
+  inherit pname version src;
 
   nativeBuildInputs = [
     cmake
@@ -166,8 +165,8 @@ freecad-utils.makeCustomizable (stdenv.mkDerivation (finalAttrs: {
 
   postFixup = ''
     mv $out/share/doc $out
-    ln -s $out/bin/FreeCAD $out/bin/freecad
-    ln -s $out/bin/FreeCADCmd $out/bin/freecadcmd
+    ln -s $out/bin/FreeCAD $out/bin/${pname}
+    ln -s $out/bin/FreeCADCmd $out/bin/${pname}cmd
   '';
 
   passthru.tests = callPackage ./freecad/tests {};

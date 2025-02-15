@@ -1,11 +1,11 @@
 {
   fetchurl,
   appimageTools,
-  src-flake
+  src
 }:
 
 appimageTools.wrapType2 {
   pname = "freecad";
   version = "realthunder";
-  src = src-flake;
+  inherit src;
 }
