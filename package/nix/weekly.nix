@@ -6,6 +6,6 @@
 
 appimageTools.wrapType2 {
   pname = "freecad";
-  version = "realthunder";
+  version = "weekly";
   src = src-flake;
 }
