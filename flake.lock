@@ -24,7 +24,7 @@
         "url": "https://github.com/FreeCAD/FreeCAD-Bundle/releases/download/weekly-builds/FreeCAD_weekly-builds-40253-conda-Linux-x86_64-py311.AppImage"
       }
     },
-    "astocad-repo": {
+    "astocad-src": {
       "flake": false,
       "locked": {
         "lastModified": 1739207903,
@@ -43,13 +43,32 @@
         "url": "https://github.com/AstoCAD/FreeCAD"
       }
     },
+    "freecad-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739648012,
+        "narHash": "sha256-NAl+msEzr9lxKi3/NNp+qRcniq4uYFidCmRVNPs6iNw=",
+        "ref": "main",
+        "rev": "de9bd5e1ce5c4b69a9e4b0e9bbb0ae63c9565633",
+        "revCount": 40265,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/FreeCAD/FreeCAD"
+      },
+      "original": {
+        "ref": "main",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/FreeCAD/FreeCAD"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1738410390,
-        "narHash": "sha256-xvTo0Aw0+veek7hvEVLzErmJyQkEcRk6PSR4zsRQFEc=",
+        "lastModified": 1739446958,
+        "narHash": "sha256-+/bYK3DbPxMIvSL4zArkMX0LQvS7rzBKXnDXLfKyRVc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3a228057f5b619feb3186e986dbe76278d707b6e",
+        "rev": "2ff53fe64443980e139eaa286017f53f88336dd0",
         "type": "github"
       },
       "original": {
@@ -63,7 +82,8 @@
       "inputs": {
         "appimage-file-rt": "appimage-file-rt",
         "appimage-file-weekly": "appimage-file-weekly",
-        "astocad-repo": "astocad-repo",
+        "astocad-src": "astocad-src",
+        "freecad-src": "freecad-src",
         "nixpkgs": "nixpkgs"
       }
     }
